@@ -1,4 +1,4 @@
-(defproject bigjule "0.1.0"
+(defproject bigjule "0.1.1-SNAPSHOT"
   :description "Clojure Dice Rolling Library"
   :url "http://github.com/dkropfuntucht/bigjule"
   :license {:name "Eclipse Public License"
