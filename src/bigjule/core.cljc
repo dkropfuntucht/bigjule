@@ -1,5 +1,7 @@
 (ns bigjule.core
-  (:require [clojure.spec.alpha :as s]))
+  (:require [clojure.spec.alpha :as s])
+  #?(:cljs
+     (:require-macros [bigjule.core])))
 
 ;;============================================================================
 ;; A spec defining the simple dice language
@@ -121,9 +123,10 @@
   "Parses a dice spec. and returns a fn that rolls the specified dice."
   (prepare-roll-parsed (s/conform ::dice-spec dice-spec)))
 
-(defmacro defroll [name dice-spec]
-  "Prepare a roll defined by dice-spec and bind it to name."
-  `(def ~name (prepare-roll ~dice-spec)))
+#?(:clj
+   (defmacro defroll [name dice-spec]
+     "Prepare a roll defined by dice-spec and bind it to name."
+     `(def ~name (prepare-roll ~dice-spec))))
 
 (defn roll [dice-spec]
   "Roll the dice-spec provided, immediately returning the result."
